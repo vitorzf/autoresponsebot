@@ -1,0 +1,53 @@
+{
+    "nome-bot": "Armaria bot",
+    "0": {
+        "msg": "Boas vindas ao bot do armaria, aliás eu sou ruim de zilean, o que deseja?",
+        "opcoes": [
+            {
+                "opcao": "Whatsapp para nudes",
+                "para": "1",
+                "cor": "success"
+            },
+            {
+                "opcao": "Email para contato",
+                "para": "2",
+                "cor": "primary"
+            },
+            {
+                "opcao": "Gostaria de saber o Website",
+                "para": "3",
+                "cor": "dark"
+            }
+        ]
+    },
+    "1": {
+        "msg": "Aqui está o nosso Whatsapp <b>(14)999008821</b>",
+        "opcoes": [
+            {
+                "opcao": "Voltar",
+                "para": "0",
+                "cor": "danger"
+            }
+        ]
+    },
+    "2": {
+        "msg": "Aqui está o nosso email : <b>igovitorbr@gmail.com</b>",
+        "opcoes": [
+            {
+                "opcao": "Voltar",
+                "para": "0",
+                "cor": "danger"
+            }
+        ]
+    },
+    "3": {
+        "msg": "Clique <a href='https://casulu.com.br/'>aqui</a> para acessar nosso site",
+        "opcoes": [
+            {
+                "opcao": "Voltar",
+                "para": "0",
+                "cor": "danger"
+            }
+        ]
+    }
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>BOT</title>
+</head>
+
+<body>
+    <div class="container-fluid" style="max-width:400px;">
+        <div class="container-fluid chat">
+
+        </div>
+        <div id="respostas">
+        </div>
+    </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script>
+    window.falas = null;
+    $(document).ready(function () {
+
+        $('#txtbox').val("Aguarde enquanto carregamos o bot...").attr('disabled', 'disabled');
+        carregarJSON();
+
+        setTimeout(() => {
+            boasVindas();
+        }, 500);
+    });
+
+    function boasVindas() {
+        var fala = window.falas[0];
+        enviarMensagem(fala.msg, "bot");
+        mostrarOpcoes(fala.opcoes);
+    }
+
+    function mostrarOpcoes(opcoes) {
+        var html = "";
+        opcoes.forEach(o => {
+            html += "<button class='btn btn-large btn-block btn-" + o.cor + "' onclick='escolherOp(" + o.para + ", \" " + o.opcao + " \")'>" + o.opcao + "</button>";
+        });
+
+        $('#respostas').html(html);
+
+    }
+
+    function escolherOp(op, txt) {
+        var fala = window.falas[op];
+        if (fala === undefined) {
+            enviarMensagem("Opção não encontrada", "bot");
+            return;
+        }
+        enviarMensagem(txt, "pessoa");
+        enviarMensagem(fala.msg, "bot");
+        mostrarOpcoes(fala.opcoes);
+    }
+
+    function enviarMensagem(msg, quem) {
+        var html = "";
+        var div = "";
+
+        if (quem == "bot") {
+            div = "<div class='col-xs-11 col-sm-11 col-md-11 col-lg-11 bot'>";
+        } else {
+            div = "<div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'></div>";
+            div += "<div class='col-xs-11 col-sm-11 col-md-11 col-lg-11 pessoa'>";
+        }
+
+        html += "<div class='mensagem row'>";
+        html += div;
+        html += msg;
+        html += "";
+
+        html += "</div>";
+        html += "</div>";
+
+        $('.chat').append(html);
+        setTimeout(() => {
+            var div = $(".chat");
+            div.scrollTop(div.prop('scrollHeight'));
+        }, 200);
+
+    }
+
+    function carregarJSON() {
+
+        jQuery.getJSON("falas/config.json")
+            .done(function (json) {
+                window.falas = json;
+                $('#txtbox').val("").removeAttr("disabled");
+            });
+
+    }
+</script>
+
+</html>
